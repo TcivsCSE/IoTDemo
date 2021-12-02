@@ -29,3 +29,6 @@ while True:
     client.publish("tcivs/box/door",t0)
     print("ok")
     time.sleep(0.1)
+
+
+

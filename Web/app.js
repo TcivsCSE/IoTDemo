@@ -19,6 +19,8 @@ var options = {
 client.connect(options)
 
 client.onConnected = onConnected
+client.onMessageArrived = onMessageArrived
+client.onConnectionLost = onConnectionLost
 
 
 
@@ -45,7 +47,14 @@ function onFail(context) {
 
 function onConnected(reconnect, uri) {
     // Once a connection has been made, make a subscription and send a message.
-    
     connected = true;
 
+}
+
+function onMessageArrived(message) {
+
+}
+
+function onConnectionLost(responseObject) {
+    connected = false;
 }

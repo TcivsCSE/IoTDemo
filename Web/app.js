@@ -16,7 +16,7 @@ var options = {
     mqttVersion: 4
 };
 
-client.connect({onSuccess:OncConnect})
+client.connect(options)
 
 
 

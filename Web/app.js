@@ -1,11 +1,11 @@
 var hostname = "192.168.50.166"
 var port = "1883"
 
-var connect = false;
+var connected = false;
 var client = new Paho.MQTT.Client(hostname, Number(port),"");
 
 var options = {
-    invocationContext: { host: "192.168.50.166", port:1883, clientId: "" },
+    invocationContext: { host: hostname, port:port, clientId: "" },
     timeout: 5,
     keepAliveInterval: 60,
     cleanSession: true,

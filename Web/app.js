@@ -1,5 +1,3 @@
-const mqtt = require('mqtt')
-console.log(mqtt)
 const client  = mqtt.connect('192.168.50.166:1883')
 
 document.getElementById("door").onclick = function(){

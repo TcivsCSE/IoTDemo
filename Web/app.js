@@ -18,6 +18,8 @@ var options = {
 
 client.connect(options)
 
+client.onConnected = onConnected
+
 
 
 document.getElementById("door").onclick = function(){
@@ -38,5 +40,12 @@ function onConnect(context) {
 
 function onFail(context) {
     connected = false;
+
+}
+
+function onConnected(reconnect, uri) {
+    // Once a connection has been made, make a subscription and send a message.
+    
+    connected = true;
 
 }

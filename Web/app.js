@@ -1,8 +1,8 @@
 var hostname = "192.168.50.166"; 
 var port = "1883";  
 
-
-var client = new Paho.MQTT.Client(hostname, Number(port));
+var connect = false;
+var client = new Paho.MQTT.Client(hostname, Number(port),"");
 
 client.connect({onSuccess:OncConnect})
 
@@ -12,4 +12,12 @@ document.getElementById("door").onclick = function(){
     message.qos = 0;
     message.retain = false;
     client.send(message)
+}
+
+function onConnect(context) {
+    // Once a connection has been made, make a subscription and send a message.
+    var connectionString = context.invocationContext.host + ":" + context.invocationContext.port + context.invocationContext.path;
+    
+    connected = true;
+
 }

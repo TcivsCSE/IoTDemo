@@ -11,7 +11,7 @@ var options = {
     timeout: 5,
     keepAliveInterval: 60,
     cleanSession: true,
-    useSSL: false,
+    useSSL: false ,
     //reconnect: true,
     onSuccess: onConnect,
     onFailure: onFail,
@@ -23,16 +23,6 @@ client.connect(options)
 client.onConnected = onConnected
 client.onMessageArrived = onMessageArrived
 client.onConnectionLost = onConnectionLost
-
-
-
-document.getElementById("door").onclick = function(){
-    message = new Paho.MQTT.Message(1);
-    message.destinationName = "tcivs/box/door"
-    message.qos = 0;
-    message.retain = false;
-    client.send(message)
-}
 
 function onConnect(context) {
     // Once a connection has been made, make a subscription and send a message.
@@ -59,4 +49,12 @@ function onMessageArrived(message) {
 
 function onConnectionLost(responseObject) {
     connected = false;
+}
+
+document.getElementById("door").onclick = function(){
+    message = new Paho.MQTT.Message(1);
+    message.destinationName = "tcivs/box/door"
+    message.qos = 0;
+    message.retain = false;
+    client.send(message)
 }

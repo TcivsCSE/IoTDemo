@@ -11,7 +11,7 @@ var options = {
     timeout: 5,
     keepAliveInterval: 60,
     cleanSession: true,
-    useSSL: true,
+    useSSL: false,
     //reconnect: true,
     onSuccess: onConnect,
     onFailure: onFail,

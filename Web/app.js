@@ -52,7 +52,7 @@ function onConnectionLost(responseObject) {
 }
 
 document.getElementById("door").onclick = function(){
-    message = new Paho.MQTT.Message(1);
+    message = new Paho.MQTT.Message("1");
     message.destinationName = "tcivs/box/door"
     message.qos = 0;
     message.retain = false;

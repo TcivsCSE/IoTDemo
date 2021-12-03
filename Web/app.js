@@ -4,6 +4,8 @@ var port = "1883"
 var connected = false;
 var client = new Paho.MQTT.Client(hostname, Number(port),"");
 
+client.startTrace();
+
 var options = {
     invocationContext: { host: hostname, port:port, clientId: "" },
     timeout: 5,

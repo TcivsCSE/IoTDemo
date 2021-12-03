@@ -12,7 +12,7 @@
     <div class="header">
         <div class="connect">
             <!-- <marquee class="title" width="50%">請按播放鍵!!</marquee> -->
-            <p class="title">現在連接到的是:192.168.50.166!!</p>
+            <p class="title">暫無連接</p>
         </div>
     </div>
     <div class="main">
@@ -57,7 +57,7 @@
         function onConnect(context) {
             // Once a connection has been made, make a subscription and send a message.
             var connectionString = context.invocationContext.host + ":" + context.invocationContext.port + context.invocationContext.path;
-            
+            document.querySelector(".title").innerHTML = "現在連接到的是:" + hostname
             connected = true;
 
         }
@@ -78,6 +78,7 @@
         }
 
         function onConnectionLost(responseObject) {
+            document.querySelector(".title").innerHTML = "暫無連接"
             connected = false;
         }
 
@@ -102,6 +103,7 @@
 
         door.addEventListener("mouseup", function(){
             state.classList.remove("open");
+            photo.src = "./source/close_door.jpg";
         })
         door.addEventListener("touchstart", function(){
             state.classList.add("open")
@@ -111,6 +113,7 @@
 
         door.addEventListener("touchend", function(){
             state.classList.remove("open");
+            photo.src = "./source/close_door.jpg";
         })
     </script>
 </body>

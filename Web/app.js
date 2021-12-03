@@ -1,5 +1,5 @@
 var hostname = "192.168.50.166"
-var port = "1883"
+var port = "8080"
 
 var connected = false;
 var client = new Paho.MQTT.Client(hostname, Number(port),"");

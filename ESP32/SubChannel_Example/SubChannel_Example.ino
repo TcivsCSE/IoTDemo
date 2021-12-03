@@ -119,5 +119,5 @@ void loop() {
 //    client.publish(topic, msg);
   }
 
-  detect();
+//  detect();
 }

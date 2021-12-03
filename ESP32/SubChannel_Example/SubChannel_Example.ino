@@ -119,5 +119,5 @@ void loop() {
 //    client.publish(topic, msg);
   }
 
-  Serial.println(digitalRead(SensorPin));
+  detect();
 }

@@ -12,6 +12,7 @@ const char topic[] = "tcivs/box/door";
 const char ctrlTopic[] = "tcivs/ctrl/door";
 // 設定繼電器接腳
 const unsigned long relayPin = 25;
+const unsigned long SensorPin = 26;
 WiFiClient espClient;
 PubSubClient client(espClient);
 unsigned long lastMsg = 0;
@@ -80,8 +81,19 @@ void reconnect() {
   }
 }
 
+
+// detector
+//void detect(){
+//  if (digitalRead(SensorPin)){
+//    digitalWrite(relayPin, HIGH);
+//    delay(1200);
+//    digitalWrite(relayPin, LOW);
+//  }
+//}
+
 void setup() {
   pinMode(relayPin, OUTPUT);
+  pinMode(SensorPin, INPUT);
   Serial.begin(115200);
   setup_wifi();
   client.setServer(mqtt_server, 1883);
@@ -106,4 +118,6 @@ void loop() {
 //    Serial.println(msg);
 //    client.publish(topic, msg);
   }
+
+  Serial.println(digitalRead(SensorPin));
 }

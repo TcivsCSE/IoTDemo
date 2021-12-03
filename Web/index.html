@@ -84,11 +84,11 @@
 
 
         function publish(topic , message){
-            messgae = new Paho.MQTT.Message(message)
-            message.destinationName = topic
-            messgae.qos = 0 ;
-            message.retain = false;
-            client.send(messgae);
+            send = new Paho.MQTT.Message(message)
+            send.destinationName = topic
+            send.qos = 0 ;
+            send.retain = false;
+            client.send(send);
         }
 
         let state = document.querySelector(".state");

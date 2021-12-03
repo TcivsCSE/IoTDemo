@@ -70,13 +70,18 @@
             connected = false;
         }
 
-        document.getElementById("door").onclick = function(){
-            message = new Paho.MQTT.Message("1");
-            message.destinationName = "tcivs/box/door"
-            message.qos = 0;
+
+        function publish(topic , message){
+            messgae = new Paho.MQTT.Message(message)
+            message.destinationName = topic
+            messgae.qos = 0 ;
             message.retain = false;
-            client.send(message)
+            client.send(messgae);
         }
+        document.getElementById("door").onclick = function(){
+            publish("tcivs/box/door","1")
+        }
+        
     </script>
 </body>
 </html>

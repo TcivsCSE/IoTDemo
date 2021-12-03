@@ -9,12 +9,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
 </head>
 <body>
-    <button class="door" id="door">
-        <img src="" alt="">
-        <label class="openDoor" for="">
-            開門  
-        </label>
-    </button>
+    <div class="header">
+        <div class="connect">
+            <!-- <marquee class="title" width="50%">請按播放鍵!!</marquee> -->
+            <p class="title">現在連接到的是:192.168.50.166!!</p>
+        </div>
+    </div>
+    <div class="main">
+        <div class="door" id="door">
+            <img src="./source/幹.png" alt="">
+            <div class="state">
+
+            </div>
+        </div>
+        <div class="door_state">
+            <img id="photo" src="./source/close_door.jpg" alt="">
+        </div>
+    </div>
 
     <script>
         var hostname = "192.168.50.166"
@@ -78,10 +89,29 @@
             message.retain = false;
             client.send(messgae);
         }
-        document.getElementById("door").onclick = function(){
+
+        let state = document.querySelector(".state");
+
+        let door = document.getElementById("door");
+        let photo = document.getElementById("photo");
+        door.addEventListener("mousedown", function(){
+            state.classList.add("open")
+            photo.src = "./source/open_door.jpg";
             publish("tcivs/box/door","1")
-        }
-        
+        })
+
+        door.addEventListener("mouseup", function(){
+            state.classList.remove("open");
+        })
+        door.addEventListener("touchstart", function(){
+            state.classList.add("open")
+            photo.src = "./source/open_door.jpg";
+            publish("tcivs/box/door","1")
+        })
+
+        door.addEventListener("touchend", function(){
+            state.classList.remove("open");
+        })
     </script>
 </body>
 </html>

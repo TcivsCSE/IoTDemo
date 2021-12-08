@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
     <title>物聯網控制開門</title>
-    <script src="./mqtt.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
 </head>
 <body>
     <div class="header">
@@ -28,6 +28,9 @@
     </div>
 
     <script>
+
+        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
         var hostname = "192.168.50.166"
         var port = "8080"
 
@@ -92,38 +95,42 @@
         }
 
         let state = document.querySelector(".state");
-
         let door = document.getElementById("door");
         let photo = document.getElementById("photo");
 
-
-
-        //getWebcam();
-        door.addEventListener("mousedown", function(){
+        function doorOpen(){
+            date = new Date()
             state.classList.add("open")
             photo.src = "./source/open_door.jpg";
-            var date = new Date()
-            
-            publish("tcivs/box/door",`1  - [${date}]`)
-        
-        })
-
-        door.addEventListener("mouseup", function(){
-            state.classList.remove("open");
-            photo.src = "./source/close_door.jpg";
-        })
-        door.addEventListener("touchstart", function(){
-            state.classList.add("open")
-            photo.src = "./source/open_door.jpg";
-            console.log("b");
             publish("tcivs/box/door",`1  - [${date}]`)
             console.log("[success] door open")
-        })
-
-        door.addEventListener("touchend", function(){
+        }
+        function doorClose(){
             state.classList.remove("open");
             photo.src = "./source/close_door.jpg";
-        })
+        }
+        door.addEventListener("mousedown", doorOpen)
+        door.addEventListener("mouseup", doorClose)
+        door.addEventListener("touchstart", doorOpen)
+        door.addEventListener("touchend", doorClose)
+
+        navigator.mediaDevices.getUserMedia({video:false, audio:true})
+            .then(function(localVoice){
+                const recognition = new SpeechRecognition();
+                
+                recognition.start();
+                recognition.addEventListener("result", function(ev){
+                    let word = event.results[0][0].transcript;
+                    console.log(word);
+                    if(word == "開門"){
+                        doorOpen()
+                    }
+                })
+                recognition.addEventListener("end", function(){
+                    console.log("voice recongition shut down");
+                    recognition.start();
+                })
+            })
     </script>
 </body>
 </html>
